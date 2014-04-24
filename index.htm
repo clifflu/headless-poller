@@ -1,9 +1,58 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<title>Hello World</title>
-	</head>
-	<body>
-		<h1>Hello World</h1>
-	</body>
+<html xmlns:ng="http://angularjs.org">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width">
+
+        <base href="/">
+
+        <link href="css/main.css" rel="stylesheet" type="text/css">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+        <title>FaceTrac</title>
+
+        <script src="js/config.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.11/require.min.js" data-main="init"></script>
+    </head>
+
+    <body ng-controller="MainCtlr">
+        <div id="g_wrap">
+            <header> 
+                <a href="/#!/">
+                    <img id="logo">
+                    <h1>Logo</h1>
+                </a>
+            </header>
+
+            <div id="c_wrap">
+                <div id="prev" class="widget g-ctlr">
+                    <button ng-click="goPrev()">
+                        <i class="fa fa-angle-double-left"></i> 
+                        Prev
+                    </button>
+                </div>
+
+                <div id="main" class="widget" ng-view>
+                    Loading
+                </div>
+
+                <div id="next" class="widget g-ctlr">
+                    <button ng-click="goNext()">
+                        Next 
+                        <i class="fa fa-angle-double-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <footer>
+                <nav><ul>
+                        <li><a href="https://about.me/clifflu">About Me</a></li>
+                        <li><a href="#">AWS UG TW</a></li>
+                        <li><a href="/#!/eula">EULA</a></li>
+                        <li><a href="https://github.com/clifflu/headless-poller">Source</a></li>
+                </ul></nav>
+            </footer>
+        </div>
+    </body>
 </html>
