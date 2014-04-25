@@ -1,26 +1,42 @@
-define(['@jquery', 'ngc_poll'], 
-function($, ngc_poll){
+define(['@jquery', 'ngc_poll', 'ngc_login', 'ngc_revoke'], 
+function($, ngc_poll, ngc_login, ngc_revoke){
     return function(module) {
 
-        MainCtlr.$inject = ['$rootScope', '$scope', '$location', '$route'];
-        function MainCtlr($rs, $scope, $location, $route) {
+        MainCtlr.$inject = ['$rootScope', '$scope', '$log', '$q', '$location', '$route', 'awsCred', 'url'];
+        function MainCtlr($rs, $scope, $log, $q, $location, $route, awsCred, url) {
             $scope._name = "MainCtlr";
 
-            $rs.pollCurrent = 1;
-            $rs.pollsOpened = 20;
+            $rs.chk_cred = function() {
+                var _d = $q.defer(),
+                    _p = _d.promise;
+
+                awsCred.is_valid().then(function(cred){
+                    _d.resolve(cred);
+                }, function(err){
+                    $log.warn(err);
+                    _d.reject(err);
+                    url.go('login');
+                });
+
+                return _p;
+            }
+
+            $rs.logout = function() {
+                awsCred.logout();
+            }
 
             $rs.go_page = function(section, param) {
-                switch (section) {
-                    case 'welcome':
-                        $location.url('/');
-                        break;
-                    case 'poll':
-                        $location.url('/poll/' + param * 1);
-                        break;
-                    case 'eula':
-                        $location.url('/eula');
-                        break;
+                if ('welcome' === section) {
+                    url.go('welcome');
                 }
+
+                awsCred.is_valid().then(function(){
+                    if ('login' === section) 
+                        section = 'welcome';
+                    url.go(section, (param * 1));
+                }, function(){
+                    url.go('login')
+                });
             }
 
             $scope.goNext = function() {
@@ -49,15 +65,13 @@ function($, ngc_poll){
         }
         module.controller('MainCtlr', MainCtlr);
 
-        EulaCtlr.$inject = ['$rootScope'];
-        function EulaCtlr($rs) {$rs.now = 'eula'}
-        module.controller('EulaCtlr', EulaCtlr)
-
         WelcomeCtlr.$inject = ['$rootScope'];
         function WelcomeCtlr($rs) {$rs.now = 'welcome'}
         module.controller('WelcomeCtlr', WelcomeCtlr)
         
         ngc_poll(module);
+        ngc_login(module);
+        ngc_revoke(module);
 
         return module;
     };
