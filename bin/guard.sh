@@ -1,4 +1,4 @@
-#!/bin/bash
-
-cd `dirname "$0"`/.. && nice guard -i -p -l2 -G "conf/guard.rb" -w .
-cd -
+#!/bin/sh
+cd `dirname "$0"`/.. 
+echo `pwd`
+nice guard -ip -l2 -G "conf/guard.rb"

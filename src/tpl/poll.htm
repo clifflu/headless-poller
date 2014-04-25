@@ -1,0 +1,14 @@
+<div>
+    <h2 class="poll-blk">POLL # <span>{{pollCurrent}}</span></h2>
+    <article>
+        <section class="poll-blk">{{quiz}}</section>
+        <div ng-repeat="o in options">
+            <button data-oid="{{o.id}}" class="poll-blk option" title="{{o.title}}">
+                <div class="ui-wrap">
+                    <div class="pct"></div>
+                    <div class="title">{{o.title}}</div>
+                </div>
+            </button>
+        </div>
+    </article>
+</div>

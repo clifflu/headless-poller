@@ -6,35 +6,45 @@ function($, ngc_poll){
         function MainCtlr($rs, $scope, $location, $route) {
             $scope._name = "MainCtlr";
 
-            $scope.$on('$routeChangeSuccess', function(evt, route){
-                console.log(route)
-            });
-
-            $rs.pollCurrent = 0;
+            $rs.pollCurrent = 1;
             $rs.pollsOpened = 20;
 
-            $scope.goNext = function() {
-                if ($rs.now == 'welcome') {
-                    $location.url('/poll/1')
-                } else if ($rs.now == 'poll') {
-                    if ($rs.pollCurrent < $rs.pollsOpened) {
-                        $location.url('/poll/' + ++$rs.pollCurrent);
-                    }
-                } else if ($rs.now == 'eula') {
-                    $location.url('/');
+            $rs.go_page = function(section, param) {
+                switch (section) {
+                    case 'welcome':
+                        $location.url('/');
+                        break;
+                    case 'poll':
+                        $location.url('/poll/' + param * 1);
+                        break;
+                    case 'eula':
+                        $location.url('/eula');
+                        break;
                 }
             }
 
-            $scope.goPrev = function() {
-                if ($rs.now == 'welcome') {
-                    // do nothing
-                } else if ($rs.now == 'poll') {
-                    if ($rs.pollCurrent > 1) {
-                        $location.url('/poll/' + --$rs.pollCurrent);
+            $scope.goNext = function() {
+                if ('poll' == $rs.now ) {
+                    if ($rs.pollCurrent < $rs.pollsOpened) {
+                        $rs.pollCurrent++;
+                    } else {
+                        $rs.pollCurrent = 1;
                     }
-                } else if ($rs.now == 'eula') {
-                    $location.url('/');
                 }
+
+                $rs.go_page('poll', $rs.pollCurrent);
+            }
+
+            $scope.goPrev = function() {
+                if ('poll' === $rs.now) {
+                    if ($rs.pollCurrent > 1) {
+                        $rs.pollCurrent --;
+                    } else {
+                        $rs.pollCurrent = $rs.pollsOpened;
+                    }
+                }
+
+                $rs.go_page('poll', $rs.pollCurrent);
             }
         }
         module.controller('MainCtlr', MainCtlr);
