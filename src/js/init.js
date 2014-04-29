@@ -3,8 +3,8 @@
  *
  */
 
-require(['@jquery', '@aws', '@ng', 'ng_ctlr', 'ng_svc']
-.concat(['@ng-route', '@ng-resource', '@ng-cookies', 'conf']), 
+require(['@jquery', '@aws', '@ng', 'ng_ctlr', 'ng_svc',
+    '@ng-route', '@ng-resource', '@ng-cookies', 'conf'], 
 function($, AWS, ng, ng_ctlr, ng_svc){    
     if (location.hostname == 'localhost') {
         // inject livereload

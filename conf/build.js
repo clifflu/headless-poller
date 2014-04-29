@@ -1,6 +1,7 @@
 ({
     baseUrl: '../src/js/',
     mainConfigFile: '../src/js/config_require.js',
+    optimize: 'uglify2',
     name: "init",
     out: "../src/js/init-built.js",
     include: [

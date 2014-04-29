@@ -1,4 +1,4 @@
-define('ng_ctlr', ['@jquery', 'ngc_poll', 'ngc_login', 'ngc_revoke'], 
+define(['@jquery', 'ngc_poll', 'ngc_login', 'ngc_revoke'], 
 function($, ngc_poll, ngc_login, ngc_revoke){
     return function(module) {
 

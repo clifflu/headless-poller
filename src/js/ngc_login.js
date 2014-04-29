@@ -1,5 +1,5 @@
-define(['@jquery', '@aws', 'conf', 'amzn-login', 'fb']
-.concat(['g-plus-one', '@jq-throttle']),
+define(['@jquery', '@aws', 'conf', 'amzn-login', 'fb',
+    'g-plus-one', '@jq-throttle'],
 function($, AWS, conf, amazon, FB){
 
     LoginCtlr.$inject = ['$log', '$rootScope', '$scope', '$http', 'url', 'awsCred'];
