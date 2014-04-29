@@ -1,5 +1,6 @@
 var require = {
     baseUrl: '/headless-poller/js/',
+    waitSeconds: 2,
     map: {
         '*': {
             '@aws': 'aws-2.0.0-rc14',
@@ -30,6 +31,9 @@ var require = {
         ],
         'fb': '//connect.facebook.net/en_US/all',
         'g-plus-one': 'https://apis.google.com/js/client:plusone',
+        'init': [
+            'init-built', 'init'
+        ],
         'jquery-1.11.0': [
             '//code.jquery.com/jquery-1.11.0.min',
         ],
