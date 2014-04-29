@@ -16,6 +16,26 @@ body, #c_wrap {position: relative;}
 }
 
 #c_wrap {
+    font-size: 110%;
+
+    h2 {font-size:140%;font-weight:bold;}
+    ul {
+        padding: 0 9%;
+        @media screen and (min-width:640px) {
+            padding: 0 12%;
+        }
+        @media screen and (min-width:960px) {
+            padding: 0 15%;
+        }
+
+
+        margin: .4em 0 1.2em;
+        li {
+            list-style:initial;
+            text-align:left;
+            line-height:1.3;
+        }
+    }
 
     .widget {
         position: relative;
@@ -23,6 +43,10 @@ body, #c_wrap {position: relative;}
         width: 100%;
         min-height: 4em;
         text-align: center;
+
+        button {
+            font-size:120%;
+        }
     }
 
     .control {
@@ -41,7 +65,7 @@ body, #c_wrap {position: relative;}
         .option {
             width: 98%;
             margin: .1em 1%;
-            min-height:4.5em;
+            min-height:3.8em;
             overflow: hidden;
 
             .pct {
@@ -51,8 +75,9 @@ body, #c_wrap {position: relative;}
                 width:0;
             }
 
-            .title {                
+            .title {
                 position: absolute;
+                font-size: 80%;
                 width: 100%; height: 100%;
                 left: 0; right: 0; top: 0; bottom: 0;
                 padding: .5em 1%;
@@ -74,6 +99,11 @@ body, #c_wrap {position: relative;}
         }
         #prev {left:0}
         #next {right:0}
+    }
+
+    @media screen and (min-width:960px) {
+        .control {width:20%;}
+        #main {width: 60%;margin-left:20%;}
     }
 }
 

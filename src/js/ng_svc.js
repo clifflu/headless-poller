@@ -13,22 +13,18 @@ function(conf, $, AWS, ngs_vote){
             }
 
             $timeout(function(){
-                $location.url(that.get_partial(section, param));
+                location.href = that.get_partial(section, param);
             })
         }
 
         this.get_partial = function(section, param) {
             switch(section) {
                 case 'welcome':
-                    return '/';
+                    return conf.base_url;
                 case 'poll':
-                    return '/poll/' + param * 1;
-                case 'eula':
-                    return '/eula/';
-                case 'consume':
-                    return '/consume/';
+                    return conf.base_url + 'poll/' + param * 1;
                 case 'login':
-                    return '/login/';
+                    return conf.base_url + 'login/';
             }
         }
 
@@ -42,16 +38,16 @@ function(conf, $, AWS, ngs_vote){
                 base += ":" + $location.port();
             }
 
-            base += ($('base').attr('href')) ;
-            base += "#!" + this.get_partial(section, param)
+            base += conf.base_url ;
+            base += this.get_partial(section, param)
 
             return base;
         }
 
     }
 
-    AWSCredFactory.$inject = ['$rootScope', '$log', '$cookieStore', '$q']
-    function AWSCredFactory($rs, $log, $cs, $q){
+    AWSCredFactory.$inject = ['$rootScope', '$log', '$cookieStore', '$q', 'url']
+    function AWSCredFactory($rs, $log, $cs, $q, url){
         var _cred = null;
 
         /**
@@ -78,6 +74,8 @@ function(conf, $, AWS, ngs_vote){
             AWS.config.credentials = null;
             $cs.remove('login_params');
             $cs.remove('login_identity');
+
+            url.go('welcome');
         }
 
         /**

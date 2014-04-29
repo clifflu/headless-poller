@@ -3,3 +3,4 @@ Vagrantfile
 .sass-cache
 *.swp
 Thumbs.db
+src/js/init-built.js

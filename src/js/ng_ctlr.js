@@ -9,7 +9,7 @@ function($, ngc_poll, ngc_login, ngc_revoke){
             $rs.chk_cred = function() {
                 var _d = $q.defer(),
                     _p = _d.promise;
-
+                
                 awsCred.is_valid().then(function(cred){
                     _d.resolve(cred);
                 }, function(err){
