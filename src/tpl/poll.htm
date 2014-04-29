@@ -1,11 +1,11 @@
 <div>
-    <h2 class="poll-blk">POLL # <span>{{pollCurrent}}</span></h2>
+    <h2 class="poll-blk">POLL # <span>{{pollCurrent}} / {{pollsOpened}} </span></h2>
     <article>
-        <section class="poll-blk">{{quiz}}</section>
-        <div ng-repeat="o in options">
-            <button data-oid="{{o.id}}" class="poll-blk option" title="{{o.title}}">
+        <section class="poll-blk">{{poll.quiz}}</section>
+        <div ng-repeat="o in poll.options">
+            <button data-oid="{{o.id}}" class="poll-blk option" title="{{o.title}}" ng-click="vote(o.id)">
                 <div class="ui-wrap">
-                    <div class="pct"></div>
+                    <div class="pct" style="width:{{divpct(votes[o.id], votesmax)}}%"></div>
                     <div class="title">{{o.title}}</div>
                 </div>
             </button>
