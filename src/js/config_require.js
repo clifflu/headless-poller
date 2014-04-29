@@ -1,5 +1,5 @@
 var require = {
-    baseUrl: '/js/',
+    baseUrl: '/headless-poller/js/',
     map: {
         '*': {
             '@aws': 'aws-2.0.0-rc14',

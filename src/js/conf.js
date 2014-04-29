@@ -1,7 +1,8 @@
 define([], function(){
     return {
+        'base_url': '/headless-poller/index.htm#!/',
         'poll': {
-            'url': '/poll.json'
+            'url': '/headless-poller/poll.json'
         },
         'aws': {
             'region': 'ap-northeast-1',
