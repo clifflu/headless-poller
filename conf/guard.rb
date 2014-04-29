@@ -10,5 +10,5 @@ guard 'livereload', :grace_period => 2 do
 end
 
 guard :compass, configuration_file: 'conf/compass.rb' do
-    watch(%r{compass\/.+\.(sass|scss)})
+    watch(%r{.+\.(sass|scss)})
 end

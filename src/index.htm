@@ -1,32 +1,40 @@
 <!DOCTYPE html>
-<html xmlns:ng="http://angularjs.org">
+<html xmlns:ng="http://angularjs.org" >
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width">
+
+        <meta name="google-signin-scope" content="profile" />
+        <meta name="google-signin-cookiepolicy" content="single_host_origin" />
 
         <base href="/">
 
         <link href="css/main.css" rel="stylesheet" type="text/css">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 
-        <title>FaceTrac</title>
+        <title>Headless Poller</title>
 
-        <script src="js/config.js"></script>
+        <script src="js/config_require.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.11/require.min.js" data-main="init"></script>
     </head>
 
     <body ng-controller="MainCtlr">
         <div id="g_wrap">
             <header> 
+                <ul class="loginout">
+                    <li ng-cloak ng-show="!identity"><a href="/#!/login">Login</a></li>
+                    <li ng-cloak ng-show="!!identity"><a href="/" ng-click="logout()"> Logout </a> [{{identity}}]</li>
+                </ul>
+
                 <a href="/#!/">
-                    <img id="logo">
-                    <h1>Logo</h1>
+                    <!--<img id="logo">-->
+                    <h1>Headless Poller</h1>
                 </a>
             </header>
 
             <div id="c_wrap">
-                <div id="prev" class="widget g-ctlr">
+                <div id="prev" class="widget control">
                     <button ng-click="goPrev()">
                         <i class="fa fa-angle-double-left"></i> 
                         Prev
@@ -37,7 +45,7 @@
                     Loading
                 </div>
 
-                <div id="next" class="widget g-ctlr">
+                <div id="next" class="control widget">
                     <button ng-click="goNext()">
                         Next 
                         <i class="fa fa-angle-double-right"></i>
@@ -49,8 +57,8 @@
                 <nav><ul>
                         <li><a href="https://about.me/clifflu">About Me</a></li>
                         <li><a href="#">AWS UG TW</a></li>
-                        <li><a href="/#!/eula">EULA</a></li>
                         <li><a href="https://github.com/clifflu/headless-poller">Source</a></li>
+                        <li><a href="/#!/revoke">Revoke</a></li>
                 </ul></nav>
             </footer>
         </div>

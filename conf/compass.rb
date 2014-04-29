@@ -1,3 +1,3 @@
-css_dir = "css"
-sass_dir = "compass"
+css_dir = "src/css"
+sass_dir = "src/compass"
 output_style = :compressed

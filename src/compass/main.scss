@@ -1,0 +1,80 @@
+@import "compass/reset";
+
+@import "_common";
+
+html, body, #g_wrap {height: 100%;}
+body, #c_wrap {position: relative;}
+
+#g_wrap {
+    height: 100%;
+
+    h1, header li {display: inline-block;}
+    header {min-height:1.8em;line-height:1.8em;padding:0 2em;}
+    .loginout {
+        float: right;
+    }
+}
+
+#c_wrap {
+
+    .widget {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        min-height: 4em;
+        text-align: center;
+    }
+
+    .control {
+        button {@extend .full-layout;}
+    }
+
+    #main {
+        min-height: 12em;
+        margin-bottom: .5em;
+
+        .poll-blk {
+            position: relative;
+            width: 100%;
+            min-height:3em;
+        }
+        .option {
+            width: 98%;
+            margin: .1em 1%;
+            min-height:4.5em;
+            overflow: hidden;
+
+            .pct {
+                position: absolute;
+                background: rgba(0,255,0,.4);
+                top:0; bottom: 0; left: 0;
+                width:0;
+            }
+
+            .title {                
+                position: absolute;
+                width: 100%; height: 100%;
+                left: 0; right: 0; top: 0; bottom: 0;
+                padding: .5em 1%;
+                z-index: 1000;
+            }
+        }
+    }
+
+    @media screen and (min-width:640px) {
+        .control {
+            position:absolute;
+            top:0;
+            bottom:0;
+            width:15%;
+        }
+        #main {
+            width: 70%;
+            margin-left:15%;
+        }
+        #prev {left:0}
+        #next {right:0}
+    }
+}
+
+footer ul li {display: inline-block;margin:0 .6em}

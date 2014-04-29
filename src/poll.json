@@ -1,0 +1,38 @@
+{
+    "1": {
+        "quiz": "您使用 AWS 的經驗為：",
+        "options": [
+            {"id":1, "title": "使用未滿一年，以 EC2 / S3 為主"},
+            {"id":2, "title": "使用未滿一年，運用 Route53, SES, SQS, DynamoDB, Elastic Beanstalk 中多數服務"},
+            {"id":3, "title": "使用超過一年，以 EC2 / S3 為主"},
+            {"id":4, "title": "使用超過一年，運用 Route53, SES, SQS, DynamoDB, Elastic Beanstalk 中多數服務"}
+        ]
+    }, 
+    "2": {
+        "quiz": "您對 NoSQL 的態度是：",
+        "options": [
+            {"id":1, "title": "不熟悉，靜觀其變"},
+            {"id":2, "title": "略懂，但實務仍以 RDBMS 為主"},
+            {"id":3, "title": "熟練運用 NoSQL 及 RDBMS 於各種環境"},
+            {"id":4, "title": "自從學了 NoSQL，RDBMS 看起來就像 WinME 一樣落伍"}
+        ]
+    }, 
+    "3": {
+        "quiz": "下列敘述中，哪項最接近您對今天內容的感想",
+        "options": [
+            {"id": 1, "title": "完全沒有畫面"},
+            {"id": 2, "title": "精彩至極；如果有時間，我想從頭再聽一遍"},
+            {"id": 3, "title": "香蕉香蕉香蕉香蕉香蕉"},
+            {"id": 4, "title": "無限期支持 Live Demo 失敗"}
+        ]
+    },
+    "4": {
+        "quiz": "如果以後有機會，想多了解這些方面",
+        "options": [
+            {"id": 1, "title": "如何使用克林貢語 SDK 操作 Mechanical Turk"},
+            {"id": 2, "title": "樂高常見架構及模式"},
+            {"id": 3, "title": "再講一次 AWS SA 準備心得"},
+            {"id": 4, "title": "如何把 clifflu fork() 回家 >///<"}
+        ]
+    }
+}
