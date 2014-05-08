@@ -77,10 +77,14 @@ function($, AWS, conf, amazon, FB){
         };
 
         function login_google_cb(authResult) {
+            $log.warn(authResult);
             if (!authResult['status']['signed_in']) {
-                alert('Login failed');
+                // Besides the end of G+ authentication process, 
+                // it's also fired when the G+ login page first loads (without cookie)
+
                 return;
             }
+
             gapi.client.load('plus','v1', function(){
                 var request = gapi.client.plus.people.get({
                     'userId': 'me'
@@ -97,7 +101,8 @@ function($, AWS, conf, amazon, FB){
 
         $scope.login_google = function() {
             gapi.auth.signIn({
-                'callback': $.debounce(50, login_google_cb),
+                //'callback': $.debounce(50, login_google_cb),
+                'callback': login_google_cb,
                 'clientid': conf.role('google').client_id
             }); 
         }
