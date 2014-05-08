@@ -96,7 +96,7 @@ function(conf, $, AWS, ngs_vote){
         }
 
         function feed_sdk () {
-            AWS.config.region = conf.aws.region;
+            AWS.config.region = conf.region;
             AWS.config.credentials = cred();
             return refresh();
         }

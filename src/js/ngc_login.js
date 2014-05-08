@@ -33,7 +33,7 @@ function($, AWS, conf, amazon, FB){
             }).then(function(data){
 
                 login({
-                    RoleArn: conf.aws.role_arn,
+                    RoleArn: conf.role('aws').arn,
                     ProviderId: 'www.amazon.com',
                     WebIdentityToken: resp['access_token'],
                     DurationSeconds: 3600
@@ -46,17 +46,18 @@ function($, AWS, conf, amazon, FB){
 
         $scope.login_amazon = function() {
             var options = { scope : 'profile' };
-            amazon.Login.setClientId(conf.aws.client_id);
+            amazon.Login.setClientId(conf.role('aws').client_id);
             amazon.Login.authorize(options, login_amazon_cb);
         }
 
         function login_facebook_cb(resp) {
+
             if (resp.status !== 'connected') {
                 return FB.login();
             }
             
             login({
-                RoleArn: conf.fb.role_arn,
+                RoleArn: conf.role('fb').arn,
                 ProviderId: 'graph.facebook.com',
                 WebIdentityToken: resp.authResponse.accessToken,
                 DurationSeconds: 3600
@@ -65,13 +66,14 @@ function($, AWS, conf, amazon, FB){
 
         $scope.login_facebook = function() {
             FB.init({
-                appId      : conf.fb.app_id,
+                appId      : conf.role('fb').app_id,
                 status     : true, // check login status
-                // cookie     : true, // enable cookies to allow the server to access the session
-                // xfbml      : true  // parse XFBML
+                cookie     : true, // enable cookies to allow the server to access the session
+                xfbml      : true  // parse XFBML
             });
 
             FB.Event.subscribe('auth.authResponseChange', login_facebook_cb);
+            FB.login();
         };
 
         function login_google_cb(authResult) {
@@ -85,7 +87,7 @@ function($, AWS, conf, amazon, FB){
                 });
                 request.execute(function(resp) {
                     login({
-                        RoleArn: conf.google.role_arn,
+                        RoleArn: conf.role('google').arn,
                         WebIdentityToken: authResult.id_token,
                         DurationSeconds: 3600,
                     }, resp.id);
@@ -96,7 +98,7 @@ function($, AWS, conf, amazon, FB){
         $scope.login_google = function() {
             gapi.auth.signIn({
                 'callback': $.debounce(50, login_google_cb),
-                'clientid': conf.google.client_id
+                'clientid': conf.role('google').client_id
             }); 
         }
     }
