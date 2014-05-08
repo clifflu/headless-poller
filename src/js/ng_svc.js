@@ -61,11 +61,7 @@ function(conf, $, AWS, ngs_vote){
                 }
             }
 
-            if (_cred) {
-                return _cred;
-            }
-            
-            return null;
+            return _cred || null;
         }
 
         function logout () {
