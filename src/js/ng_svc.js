@@ -61,11 +61,7 @@ function(conf, $, AWS, ngs_vote){
                 }
             }
 
-            if (_cred) {
-                return _cred;
-            }
-            
-            return null;
+            return _cred || null;
         }
 
         function logout () {
@@ -96,7 +92,7 @@ function(conf, $, AWS, ngs_vote){
         }
 
         function feed_sdk () {
-            AWS.config.region = conf.aws.region;
+            AWS.config.region = conf.region;
             AWS.config.credentials = cred();
             return refresh();
         }
