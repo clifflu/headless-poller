@@ -2,8 +2,8 @@ define(['@jquery', '@aws', 'conf', 'amzn-login', 'fb',
     'g-plus-one', '@jq-throttle'],
 function($, AWS, conf, amazon, FB){
 
-    LoginCtlr.$inject = ['$log', '$rootScope', '$scope', '$http', 'url', 'awsCred'];
-    function LoginCtlr($log, $rs, $scope, $http, url, awsCred){
+    LoginCtlr.$inject = ['$log', '$rootScope', '$scope', '$timeout', '$http', 'url', 'awsCred'];
+    function LoginCtlr($log, $rs, $scope, $timeout, $http, url, awsCred){
 
         $rs.chk_cred().then(function(data){
             url.go('poll', 1); 
@@ -53,7 +53,10 @@ function($, AWS, conf, amazon, FB){
         function login_facebook_cb(resp) {
 
             if (resp.status !== 'connected') {
-                return FB.login();
+                $timeout(function(){
+                    FB.login(login_facebook_cb)
+                }, 100);
+                return ;
             }
             
             login({
@@ -68,12 +71,11 @@ function($, AWS, conf, amazon, FB){
             FB.init({
                 appId      : conf.role('fb').app_id,
                 status     : true, // check login status
-                cookie     : true, // enable cookies to allow the server to access the session
-                xfbml      : true  // parse XFBML
+                // cookie     : true, // enable cookies to allow the server to access the session
+                // xfbml      : true  // parse XFBML
             });
 
-            FB.Event.subscribe('auth.authResponseChange', login_facebook_cb);
-            FB.login();
+            FB.login(login_facebook_cb);
         };
 
         function login_google_cb(authResult) {
