@@ -46,9 +46,20 @@ function(conf, $, AWS, ngs_vote){
 
     }
 
-    AWSCredFactory.$inject = ['$rootScope', '$log', '$cookieStore', '$q', 'url']
-    function AWSCredFactory($rs, $log, $cs, $q, url){
+    AWSCredFactory.$inject = ['$rootScope', '$log', '$timeout', '$cookieStore', '$q', 'url']
+    function AWSCredFactory($rs, $log, $timeout, $cs, $q, url){
         var _cred = null;
+
+        $rs.$on('logging_out', function(){
+            _cred = null;
+            $rs.identity = undefined;
+            AWS.config.credentials = null;
+            $cs.remove('login_params');
+            $cs.remove('login_identity');
+
+            url.go('welcome');
+        })
+
 
         /**
          * Returns cred object and write to _cred
@@ -62,16 +73,6 @@ function(conf, $, AWS, ngs_vote){
             }
 
             return _cred || null;
-        }
-
-        function logout () {
-            _cred = null;
-            $rs.identity = undefined;
-            AWS.config.credentials = null;
-            $cs.remove('login_params');
-            $cs.remove('login_identity');
-
-            url.go('welcome');
         }
 
         /**
@@ -115,7 +116,7 @@ function(conf, $, AWS, ngs_vote){
                 _cred.refresh(function(err, data){
                     if (err) {
                         $log.warn(['refresh failed', err])
-                        logout();
+                        $timeout(function(){$rs.logout()});
                         _d.reject(err);
                     } else {
                         _d.resolve(cred);
@@ -134,8 +135,7 @@ function(conf, $, AWS, ngs_vote){
         return {
             is_valid: is_valid,
             feed_sdk: feed_sdk,
-            login: login,
-            logout: logout
+            login: login
         }
     }
 

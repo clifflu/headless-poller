@@ -22,7 +22,9 @@ function($, ngc_poll, ngc_login, ngc_revoke){
             }
 
             $rs.logout = function() {
-                awsCred.logout();
+                $rs.$emit('logging_out');
+                
+                $rs.$emit('logged_out');
             }
 
             $rs.go_page = function(section, param) {

@@ -12,6 +12,7 @@ function($, AWS, conf, amazon, FB){
         function login(params, identity) {
             awsCred.login(params, identity).then(function(){
                 url.go('poll', 1);
+                $rs.$emit('logged_in');
             }, function(err){
                 $log.warn(err);
                 alert("Oops, login failed somehow");
