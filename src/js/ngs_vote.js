@@ -5,17 +5,27 @@ define([], function(){
 
         var _last_update = [],
             _promises = [], 
-            _db;
+            _db_p;
+
+        $rs.$on('logged_out', function(){
+            console.log("User Logout");
+            _db_p = false;
+        })
+
+        $rs.$on('logged_in', function(){
+            // do nothing, create DB object lazily
+        })
 
         function db_promise(){
-            var _d = $q.defer(),
-                _p = _d.promise;
+            return _db_p || _new_db();
+        }
 
-            if (_db)     {
-                _d.resolve(_db);
-                return _p
-            } 
-
+        function _new_db() {
+            var _d = $q.defer(), 
+                _db;
+            
+            _db_p = _d.promise;
+            
             awsCred.feed_sdk().then(function(){
                 _db = new AWS.DynamoDB();
                 _d.resolve(_db);
@@ -23,8 +33,8 @@ define([], function(){
                 $log.warn(err);
                 _d.reject(err);
             })
-            
-            return _p;
+
+            return _db_p;
         }
 
         function vote_for(q_id, o_id) {
